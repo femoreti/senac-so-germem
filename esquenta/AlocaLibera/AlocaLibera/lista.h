@@ -144,7 +144,7 @@ int remov(Lista *lista, int pos) {
 		emAndamento->anterior->seguinte = emAndamento->seguinte;
 		emAndamento->seguinte->anterior = emAndamento->anterior;
 	}
-	free(remov_elemento->dado);
+	//free(remov_elemento->dado);
 	free(remov_elemento);
 	lista->tamanho--;
 	return 0;
