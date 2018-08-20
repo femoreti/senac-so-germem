@@ -1,0 +1,8 @@
+﻿  main.c
+d:\senac\so\1\alocalibera\alocalibera\lista.h(132): warning C4553: '==': o resultado da expressão não usado; você pretendia que fosse '='?
+d:\senac\so\1\alocalibera\alocalibera\lista.h(147): warning C4022: 'free': incompatibilidade de ponteiro para parâmetro real 1
+d:\senac\so\1\alocalibera\alocalibera\main.c(48): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
+d:\senac\so\1\alocalibera\alocalibera\main.c(60): warning C4047: '=': 'char' difere em níveis de indireção de 'void *'
+d:\senac\so\1\alocalibera\alocalibera\main.c(64): warning C4047: 'return': 'void *' difere em níveis de indireção de 'int'
+d:\senac\so\1\alocalibera\alocalibera\main.c(83): warning C4047: '==': 'int' difere em níveis de indireção de 'void *'
+  AlocaLibera.vcxproj -> D:\Senac\so\1\AlocaLibera\Debug\AlocaLibera.exe
