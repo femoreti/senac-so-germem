@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "lista.h"
 
 #define SIZE 4096
 
-char memoria[SIZE];
+int8_t memoria[SIZE];
 
 void initialize()
 {
 	int i;
-	int lenght = sizeof(memoria) / sizeof(char);
+	int lenght = SIZE;
 	for (i = 0; i < lenght; i++)
 	{
 		memoria[i] = '0';
@@ -20,7 +21,7 @@ void initialize()
 void show()
 {
 	int i;
-	int lenght = sizeof(memoria) / sizeof(char);
+	int lenght = SIZE;
 
 	for (i = 0; i < lenght; i++)
 	{
@@ -34,7 +35,7 @@ void show()
 void *Aloca(unsigned int memory)
 {
 	int i;
-	int lenght = sizeof(memoria) / sizeof(char);
+	int lenght = SIZE;
 
 	int *index = malloc(sizeof(int));
 	*index = 0;
@@ -75,9 +76,9 @@ void *Aloca(unsigned int memory)
 void Libera(void *index)
 {
 	int i;
-	int lenght = sizeof(memoria) / sizeof(char);
+	int lenght = SIZE;
 
-	int *x = (int *)index - 1;
+	int *x = (int*)index;
 
 	for (i = *x; i < lenght; i++)
 	{
@@ -94,14 +95,17 @@ int main(void)
 {
 	initialize();
 
-	//Lista *list;
-	//initList(list);
+	Lista *list = Aloca(sizeof(Lista));
+	initList(list);
 
-	int *test = Aloca(sizeof(Lista));
-	int *test1 = Aloca(sizeof(char));
-	//Libera(test);
+	float f = 11.59f;
+	ins_na_lista_vazia(list, 5);
+	ins_fim_lista(list, "felipe");
+	ins_fim_lista(list, &f);
+
+	remov(list, 1); //Nao esta removendo da memoria a lista nem o dado pois o int* nao é o mesmo que é alocado
+
 	show();
-
 	//scanf("");
 
 	return 0;
