@@ -1,66 +1,66 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* ---------- dlista.h ----------- */
+void *Aloca(unsigned int memory);
+void Libera(void *index);
+
 typedef struct dl_elementoLista {
-	int dado;
+	void *dado;
 	struct dl_elementoLista *anterior;
 	struct dl_elementoLista*seguinte;
 } ListaObj;
 
 typedef struct dl_ListaDetectada {
-	ListaObj *inÌcio;
+	ListaObj *in√≠cio;
 	ListaObj *fim;
 	int tamanho;
 } Lista;
 
-/* inicializaÁ„o da lista */
 void initList(Lista *lista)
 {
-	lista->inÌcio = NULL;
+	lista->in√≠cio = NULL;
 	lista->fim = NULL;
 	lista->tamanho = 0;
 }
-ListaObj *aloc(ListaObj *novo_elemento)
+ListaObj *aloc(ListaObj *novo_elemento, void* dado)
 {
 	novo_elemento->anterior = NULL;
 	novo_elemento->seguinte = NULL;
-	novo_elemento->dado = 0;
+	novo_elemento->dado = Aloca(sizeof(dado));
 	return novo_elemento;
 }
 
-/* INSER«√O */
-int ins_na_lista_vazia(Lista * lista, int dado) {
-	ListaObj *novo_elemento = malloc(sizeof(ListaObj));
-	novo_elemento = aloc(novo_elemento);
+int ins_na_lista_vazia(Lista * lista, void* dado) {
+	ListaObj *novo_elemento = Aloca(sizeof(ListaObj));
+	novo_elemento = aloc(novo_elemento, dado);
 	if (novo_elemento == NULL)
 		return -1;
 	novo_elemento->dado = dado;
-	novo_elemento->anterior = lista->inÌcio;
+	novo_elemento->anterior = lista->in√≠cio;
 	novo_elemento->seguinte = lista->fim;
-	lista->inÌcio = novo_elemento;
+	lista->in√≠cio = novo_elemento;
 	lista->fim = novo_elemento;
 	lista->tamanho++;
 	return 0;
 }
 
-int ins_inicio_lista(Lista * lista, int dado) {
-	ListaObj *novo_elemento = malloc(sizeof(ListaObj));
-	novo_elemento = aloc(novo_elemento);
+int ins_inicio_lista(Lista * lista, void* dado) {
+	ListaObj *novo_elemento = Aloca(sizeof(ListaObj));
+	novo_elemento = aloc(novo_elemento, dado);
 	if (novo_elemento == NULL)
 		return -1;
 	novo_elemento->dado = dado;
 	novo_elemento->anterior = NULL;
-	novo_elemento->seguinte = lista->inÌcio;
-	lista->inÌcio->anterior = novo_elemento;
-	lista->inÌcio = novo_elemento;
+	novo_elemento->seguinte = lista->in√≠cio;
+	lista->in√≠cio->anterior = novo_elemento;
+	lista->in√≠cio = novo_elemento;
 	lista->tamanho++;
 	return 0;
 }
 
-int ins_fim_lista(Lista * lista, int dado) {
-	ListaObj *novo_elemento = malloc(sizeof(ListaObj));
-	novo_elemento = aloc(novo_elemento);
+int ins_fim_lista(Lista * lista, void* dado) {
+	ListaObj *novo_elemento = Aloca(sizeof(ListaObj));
+	novo_elemento = aloc(novo_elemento, dado);
 	if (novo_elemento == NULL)
 		return -1;
 	novo_elemento->dado = dado;
@@ -72,14 +72,14 @@ int ins_fim_lista(Lista * lista, int dado) {
 	return 0;
 }
 
-int ins_depois(Lista * lista, int dado, int pos) {
+int ins_depois(Lista * lista, void* dado, int pos) {
 	int i;
-	ListaObj *novo_elemento = malloc(sizeof(ListaObj)), *emAndamento = malloc(sizeof(ListaObj));
-	novo_elemento = aloc(novo_elemento);
+	ListaObj *novo_elemento = Aloca(sizeof(ListaObj)), *emAndamento = Aloca(sizeof(ListaObj));
+	novo_elemento = aloc(novo_elemento, dado);
 	if (novo_elemento == NULL)
 		return -1;
 	novo_elemento->dado = dado;
-	emAndamento = lista->inÌcio;
+	emAndamento = lista->in√≠cio;
 	for (i = 1; i < pos; ++i)
 		emAndamento = emAndamento->seguinte;
 	novo_elemento->seguinte = emAndamento->seguinte;
@@ -93,20 +93,20 @@ int ins_depois(Lista * lista, int dado, int pos) {
 	return 0;
 }
 
-int ins_antes(Lista * lista, int dado, int pos) {
+int ins_antes(Lista * lista, void* dado, int pos) {
 	int i;
-	ListaObj *novo_elemento = malloc(sizeof(ListaObj)), *emAndamento = malloc(sizeof(ListaObj));
-	novo_elemento = aloc(novo_elemento);
+	ListaObj *novo_elemento = Aloca(sizeof(ListaObj)), *emAndamento = Aloca(sizeof(ListaObj));
+	novo_elemento = aloc(novo_elemento, dado);
 	if (novo_elemento == NULL)
 		return -1;
 	novo_elemento->dado = dado;
-	emAndamento = lista->inÌcio;
+	emAndamento = lista->in√≠cio;
 	for (i = 1; i < pos; ++i)
 		emAndamento = emAndamento->seguinte;
 	novo_elemento->seguinte = emAndamento;
 	novo_elemento->anterior = emAndamento->anterior;
 	if (emAndamento->anterior == NULL)
-		lista->inÌcio = novo_elemento;
+		lista->in√≠cio = novo_elemento;
 	else
 		emAndamento->anterior->seguinte = novo_elemento;
 	emAndamento->anterior = novo_elemento;
@@ -115,44 +115,43 @@ int ins_antes(Lista * lista, int dado, int pos) {
 }
 
 
-/* REMO«√O */
 int remov(Lista *lista, int pos) {
 	int i;
-	ListaObj *remov_elemento = malloc(sizeof(ListaObj)), *emAndamento = malloc(sizeof(ListaObj));
+	ListaObj *remov_elemento, *emAndamento;
 
 	if (lista->tamanho == 0)
 		return -1;
 
-	if (pos == 1) { /* remoÁ„o do 1∞ elemento */
-		remov_elemento = lista->inÌcio;
-		lista->inÌcio = lista->inÌcio->seguinte;
-		if (lista->inÌcio == NULL)
+	if (pos == 1) { 
+		remov_elemento = lista->in√≠cio;
+		lista->in√≠cio = lista->in√≠cio->seguinte;
+		if (lista->in√≠cio == NULL)
 			lista->fim = NULL;
 		else
-			lista->inÌcio->anterior == NULL;
+			lista->in√≠cio->anterior == NULL;
 	}
-	else if (pos == lista->tamanho) { /* remoÁ„o do ˙ltimo elemento */
+	else if (pos == lista->tamanho) { 
 		remov_elemento = lista->fim;
 		lista->fim->anterior->seguinte = NULL;
 		lista->fim = lista->fim->anterior;
 	}
-	else { /* remoÁ„o em outro lugar */
-		emAndamento = lista->inÌcio;
+	else { 
+		emAndamento = lista->in√≠cio;
 		for (i = 1; i<pos; ++i)
 			emAndamento = emAndamento->seguinte;
 		remov_elemento = emAndamento;
 		emAndamento->anterior->seguinte = emAndamento->seguinte;
 		emAndamento->seguinte->anterior = emAndamento->anterior;
 	}
-	//free(remov_elemento->dado);
-	free(remov_elemento);
+	Libera(remov_elemento->dado);
+	Libera(remov_elemento);
 	lista->tamanho--;
 	return 0;
 }
 
-void ShowList(Lista *lista) { /* mostrar avanÁando */
-	ListaObj *emAndamento = malloc(sizeof(ListaObj));
-	emAndamento = lista->inÌcio; /* ponto de partida do 1∞ elemento */
+void ShowList(Lista *lista) { 
+	ListaObj *emAndamento;
+	emAndamento = lista->in√≠cio; 
 	printf("[ ");
 	while (emAndamento != NULL) {
 		printf("%d ", emAndamento->dado);
@@ -161,9 +160,9 @@ void ShowList(Lista *lista) { /* mostrar avanÁando */
 	printf("]\n");
 }
 
-void ShowList_Inv(Lista *lista) { /* mostrar recuando */
-	ListaObj *emAndamento = malloc(sizeof(ListaObj));
-	emAndamento = lista->fim; /* ponto de partida do ˙ltimo elemento */
+void ShowList_Inv(Lista *lista) { 
+	ListaObj *emAndamento;
+	emAndamento = lista->fim; 
 	printf("[ ");
 	while (emAndamento != NULL) {
 		printf("%d : ", emAndamento->dado);
@@ -172,9 +171,7 @@ void ShowList_Inv(Lista *lista) { /* mostrar recuando */
 	printf("]\n");
 }
 
-/**************************/
 void destruir(Lista *lista) {
 	while (lista->tamanho > 0)
 		remov(lista, 1);
 }
-/* -------- FIM lista.h --------- */
