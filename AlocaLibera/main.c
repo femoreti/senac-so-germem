@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include "lista.h"
 #include "memoria.h"
 
@@ -8,18 +7,22 @@ int main(void)
 {
 	initialize();
 
-	int *i = Aloca(10);
-	int *j = Aloca(5);
-	int *k = Aloca(15);
-	char *f = Aloca(sizeof("felipe"));
 	Lista *list = Aloca(sizeof(Lista));
-	//initList(list); //se inicializar a lista ele para de remover da memoria, nao sei pq
-	//ins_na_lista_vazia(list, (void *) 8);
-	show();
-	printf("\n");
-	Libera(list);
+
+	int *x = (int*)list;
+	printf("%d\n", *x);
+	initList(list); //iniciei a lista e ela mudou o valor, nao sei pq
+	int *q = (int*)list;
+	printf("%d\n", *q);
+	//ins_na_lista_vazia(list, "fe");
+	//int *v = (int*)list;
+	//printf("%d\n", *v);
+
+	//show();
+	//printf("\n");
+	//Libera(list);
 	//remov(list, 1);
-	show();
+	//show();
 
 	return 0;
 }

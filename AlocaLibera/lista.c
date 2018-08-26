@@ -11,6 +11,7 @@ void initList(Lista *lista)
 	lista->fim = NULL;
 	lista->tamanho = 0;
 }
+
 ListaObj *aloc(ListaObj *novo_elemento, void* dado)
 {
 	novo_elemento->anterior = NULL;
@@ -21,6 +22,7 @@ ListaObj *aloc(ListaObj *novo_elemento, void* dado)
 
 int ins_na_lista_vazia(Lista * lista, void* dado) {
 	ListaObj *novo_elemento = Aloca(sizeof(ListaObj));
+
 	novo_elemento = aloc(novo_elemento, dado);
 	if (novo_elemento == NULL)
 		return -1;
@@ -117,7 +119,7 @@ int remov(Lista *lista, int pos) {
 		if (lista->inicio == NULL)
 			lista->fim = NULL;
 		else
-			lista->inicio->anterior == NULL;
+			lista->inicio->anterior = NULL;
 	}
 	else if (pos == lista->tamanho) {
 		remov_elemento = lista->fim;
@@ -143,7 +145,7 @@ void ShowList(Lista *lista) {
 	emAndamento = lista->inicio;
 	printf("[ ");
 	while (emAndamento != NULL) {
-		printf("%d ", emAndamento->dado);
+		printf("%p ", emAndamento->dado);
 		emAndamento = emAndamento->seguinte;
 	}
 	printf("]\n");
@@ -154,7 +156,7 @@ void ShowList_Inv(Lista *lista) {
 	emAndamento = lista->fim;
 	printf("[ ");
 	while (emAndamento != NULL) {
-		printf("%d : ", emAndamento->dado);
+		printf("%p : ", emAndamento->dado);
 		emAndamento = emAndamento->anterior;
 	}
 	printf("]\n");

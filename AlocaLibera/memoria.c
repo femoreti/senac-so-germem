@@ -32,6 +32,7 @@ void *Aloca(unsigned int memory)
 	int i;
 	int lenght = SIZE;
 
+	//int *index = malloc(sizeof(int));
 	int *index = malloc(sizeof(int));
 	*index = 0;
 	int canUse = 1;
@@ -51,7 +52,7 @@ void *Aloca(unsigned int memory)
 		if (canUse == 0)
 			continue;
 
-		if (canUse == 1 && (i - *index == memory + 1))
+		if (canUse == 1 && (i - (unsigned int)*index == memory + 1))
 		{
 			memoria[*index] = '-';
 			memoria[i] = 'N';
@@ -75,6 +76,8 @@ void Libera(void *index)
 
 	int *x = (int*)index;
 	*x = *x - 1;
+
+	printf("%d\n", *x);
 
 	for (i = *x; i < lenght; i++)
 	{

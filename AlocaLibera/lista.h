@@ -1,7 +1,7 @@
 typedef struct dl_elementoLista {
 	void *dado;
 	struct dl_elementoLista *anterior;
-	struct dl_elementoLista*seguinte;
+	struct dl_elementoLista *seguinte;
 } ListaObj;
 
 typedef struct dl_ListaDetectada {

@@ -1,4 +1,6 @@
-#define SIZE 4096
+#include <stdint.h>
+
+#define SIZE 100
 
 int8_t memoria[SIZE];
 
