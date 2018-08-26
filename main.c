@@ -16,7 +16,7 @@ int main(void)
 	ins_fim_lista(list, "felipe");
 	ins_fim_lista(list, &f);
 
-	remov(list, 1); //Nao esta removendo da memoria a lista nem o dado pois o int* nao é o mesmo que é alocado
+	//remov(list, 1); //Nao esta removendo da memoria a lista nem o dado pois o int* nao é o mesmo que é alocado
 
 	show();
 	//scanf("");
