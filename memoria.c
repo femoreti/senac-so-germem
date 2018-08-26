@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
-#include "lista.h"
-
-#define SIZE 4096
-
-int8_t memoria[SIZE];
+#include "memoria.h"
 
 void initialize()
 {
@@ -89,24 +84,4 @@ void Libera(void *index)
 			break;
 		}
 	}
-}
-
-int main(void)
-{
-	initialize();
-
-	Lista *list = Aloca(sizeof(Lista));
-	initList(list);
-
-	float f = 11.59f;
-	ins_na_lista_vazia(list, 5);
-	ins_fim_lista(list, "felipe");
-	ins_fim_lista(list, &f);
-
-	remov(list, 1); //Nao esta removendo da memoria a lista nem o dado pois o int* nao é o mesmo que é alocado
-
-	show();
-	//scanf("");
-
-	return 0;
 }
