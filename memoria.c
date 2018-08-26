@@ -74,6 +74,7 @@ void Libera(void *index)
 	int lenght = SIZE;
 
 	int *x = (int*)index;
+	*x = *x - 1;
 
 	for (i = *x; i < lenght; i++)
 	{
