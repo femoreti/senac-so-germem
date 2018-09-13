@@ -7,6 +7,7 @@ int Shell_List(char **args);
 int Shell_Help(char **args);
 int Shell_Exit(char **args);
 int Shell_MkDir(char **args);
+int Shell_Clear(char **args);
 
 void Shell_Loop(void);
 char *Shell_ReadLine(void);
