@@ -8,6 +8,7 @@ int Shell_Help(char **args);
 int Shell_Exit(char **args);
 int Shell_MkDir(char **args);
 int Shell_Clear(char **args);
+int Sheel_RmDir(char ** args);
 
 void Shell_Loop(void);
 char *Shell_ReadLine(void);
