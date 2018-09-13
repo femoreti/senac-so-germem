@@ -4,22 +4,27 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include <dirent.h>
 #include "shell.h"
+
+#define RWX_MODE 0700
 
 char *builtin_cmds[] = {
     "_cd",
     "_ls",
     "_help",
-    "_exit"
+    "_exit",
+    "_mkdir"
 };
 
 int (*builtin_func[])(char **) = {
     &Shell_CD,
     &Shell_List,
     &Shell_Help,
-    &Shell_Exit
+    &Shell_Exit,
+    &Shell_MkDir
 };
 
 void Shell_Loop(void)
@@ -29,11 +34,10 @@ void Shell_Loop(void)
     int status;
 
     do{
-        size_t size = 1024;
-        char *buf;
-        char *dirName = getcwd(buf, size);
+        char diretorio[10247];
+        getcwd( diretorio, sizeof(diretorio));
 
-        printf("%s>>", dirName);
+        printf("%s>>",diretorio);
         line = Shell_ReadLine();
         args = Shell_SplitLine(line);
         status = Shell_Execute(args);
@@ -189,4 +193,13 @@ int Shell_Help(char **args){
 int Shell_Exit(char **args){
 
     return 0;
+}
+
+int Shell_MkDir(char **args) {
+    struct stat st = { 0 };
+    if (stat(args[1], &st) == -1) {
+        mkdir(args[1], RWX_MODE);
+    }
+
+    return 1;
 }
