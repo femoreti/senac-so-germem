@@ -16,7 +16,8 @@ char *builtin_cmds[] = {
     "_ls",
     "_help",
     "_exit",
-    "_mkdir"
+    "_mkdir",
+    "_clear"
 };
 
 int (*builtin_func[])(char **) = {
@@ -24,7 +25,8 @@ int (*builtin_func[])(char **) = {
     &Shell_List,
     &Shell_Help,
     &Shell_Exit,
-    &Shell_MkDir
+    &Shell_MkDir,
+    &Shell_Clear
 };
 
 void Shell_Loop(void)
@@ -199,6 +201,16 @@ int Shell_MkDir(char **args) {
     struct stat st = { 0 };
     if (stat(args[1], &st) == -1) {
         mkdir(args[1], RWX_MODE);
+    }
+
+    return 1;
+}
+
+int Shell_Clear(char **args) {
+    int x;
+    for ( x = 0; x < 10; x++ ) 
+    {
+        printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
     return 1;
