@@ -17,6 +17,7 @@ char *builtin_cmds[] = {
     "_help",
     "_exit",
     "_mkdir",
+    "_rmdir",
     "_clear"
 };
 
@@ -26,6 +27,7 @@ int (*builtin_func[])(char **) = {
     &Shell_Help,
     &Shell_Exit,
     &Shell_MkDir,
+    &Sheel_RmDir,
     &Shell_Clear
 };
 
@@ -211,6 +213,18 @@ int Shell_Clear(char **args) {
     for ( x = 0; x < 10; x++ ) 
     {
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    }
+
+    return 1;
+}
+
+/* remove folder */
+int Sheel_RmDir(char ** args)
+{
+    int statrm = rmdir(args[1]);
+    if(statrm==-1)
+    {
+        perror("+--- Error in rmdir ");
     }
 
     return 1;
